@@ -52,7 +52,7 @@ class Feedback extends React.Component {
 
     render() {
         return (
-            <>
+            <div className="feedback">
             <Section title="Please leave feedback">
                 <FeedBackOptions
                 onIncrementGood={this.countIncrementGood}
@@ -73,7 +73,7 @@ class Feedback extends React.Component {
                 ) : null}
             </Section>
             {this.state.total ? null : <Notification message="No feedback given" />}
-            </>
+            </div>
         );
     }
 }
