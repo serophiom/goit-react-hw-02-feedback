@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FeedbackOptions = ({ onIncrementGood, onIncrementNeutral, onIncrementBad }) => (
     <div className="Feedback__controls">
@@ -7,5 +8,11 @@ const FeedbackOptions = ({ onIncrementGood, onIncrementNeutral, onIncrementBad }
         <button type="button" onClick={onIncrementBad}>Bad</button>  
     </div>
 );
+
+Statistics.propTypes = {
+    onIncrementGood: PropTypes.func.isRequired,
+    onIncrementNeutral: PropTypes.func.isRequired,
+    onIncrementBad: PropTypes.func.isRequired
+}
 
 export default FeedbackOptions;
