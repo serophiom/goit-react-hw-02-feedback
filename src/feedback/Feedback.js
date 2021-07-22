@@ -9,48 +9,31 @@ class Feedback extends React.Component {
     state = {
         good: 0,
         neutral: 0,
-        bad: 0,
-        total: 0,
-        positive: 0
+        bad: 0
     };
 
     countIncrementGood = () => {
         this.setState(prevState => ({
             good: prevState.good + 1,
         }));
-        this.countTotalFeedback();
-        this.countPositiveFeedbackPercentage();
     };
 
     countIncrementNeutral = () => {
         this.setState(prevState => ({
             neutral: prevState.neutral + 1,
         }));
-        this.countTotalFeedback();
-        this.countPositiveFeedbackPercentage();
     };
 
     countIncrementBad = () => {
         this.setState(prevState => ({
             bad: prevState.bad + 1,
         }));
-        this.countTotalFeedback();
-        this.countPositiveFeedbackPercentage();
-    };
-
-    countTotalFeedback = () => {
-        this.setState(prevState => ({
-            total: prevState.total + 1,
-        }));
-    };
-
-    countPositiveFeedbackPercentage = () => {
-        this.setState(prevState => ({
-            positive: Math.round(prevState.good / prevState.total * 100),
-        }));
     };
 
     render() {
+        const total = this.state.good + this.state.neutral + this.state.bad;
+        const positivePercentage = Math.round(this.state.good / total * 100)
+
         return (
             <div className="feedback">
             <Section title="Please leave feedback">
@@ -62,17 +45,17 @@ class Feedback extends React.Component {
             </Section>
 
             <Section title="Statistics">
-                {this.state.total ? (
+                {total ? (
                     <Statistics
                     good={this.state.good}
                     neutral={this.state.neutral}
                     bad={this.state.bad}
-                    total={this.state.total}
-                    positivePercentage={this.state.positive}
+                    total={total}
+                    positivePercentage={positivePercentage}
                 />
                 ) : null}
             </Section>
-            {this.state.total ? null : <Notification message="No feedback given" />}
+            {total ? null : <Notification message="No feedback given" />}
             </div>
         );
     }
